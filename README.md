@@ -2,6 +2,6 @@ All data, values, and assumptions used in the code in this repository directly f
 
 The usage of this repostiory is governed by a MIT License, please see LICENSE for details.
   
-# Paying for News: What Google and Meta Owe US Publishers
+# Paying for News: What Google and Meta Owe US Publishers?
 
 What do Google and Meta owe US news publishers?
