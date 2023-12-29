@@ -1,7 +1,7 @@
-All data, values, and assumptions used in the code in this repository directly from an economics research paper titled, "Paying for News: What Google and Meta Owe US Publishers", authored by, Patrick Holder, Haaris Mateen, Anya Schiffrin, Haris Tabakovic, hereafter referred to as "source research". The purpose of this repository is to aid researchers to calculate numbers for their own countries. Please contact the authors (hmateen@uh.edu) of the "source research" for any questions or comments on the data, assumptions, or conclusions.
+# Paying for News: What Google and Meta Owe US Publishers
 
-The usage of this repostiory is governed by a MIT License, please see LICENSE for details.
-  
-# Paying for News: What Google and Meta Owe US Publishers?
+A [research paper](https://policydialogue.org/publications/working-papers/paying-for-news-what-google-and-meta-owe-us-publishers-draft-working-paper/) titled _Paying for News: What Google and Meta Owe US Publishers_ by Patrick Holder, Haaris Mateen, Anya Schiffrin, and Haris Tabakovic estimates the payment that Facebook and Google Search platforms would owe to news publishers for the use of news content, if the Journalism Competition & Preservation Act (JCPA) comes into force using a novel methodology.
 
-What do Google and Meta owe US news publishers?
+## This repo: Web-Application and Scope
+
+This repo contains source code for a streamlit hosted web-application that makes it easy to calculate the "fair payment" for other markets using the methodology described in the above paper. The application is available for exploration at at: <https://payingfornews.streamlit.app/>. Please note that all data, values, and assumptions used in the code in this repository directly from the above source paper. The purpose of this repository is to aid researchers to calculate numbers for their own countries and no gurantee about the accuracy of the generated "fair payment" should be expected. Please contact [Haaris Mateen](emailto:hmateen@uh.edu) the lead author of the study for any questions or comments on the original study, including the methodology and assumptions, or if you would like to understand more the genrated numbers from this web application.

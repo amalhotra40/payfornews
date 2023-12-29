@@ -1,6 +1,6 @@
 import streamlit as st
 
-APP_NAME = "Pay for news"
+APP_NAME = "Paying for news"
 
 
 st.set_page_config(
@@ -11,12 +11,90 @@ st.set_page_config(
 )
 st.title(APP_NAME)
 
-with st.sidebar:
-    v1 = st.number_input("Google search ad revenue", value=0.0)
-    v2 = st.number_input("Fraction user demand", value=0.350)
-    v3 = st.number_input(
-        "Split share", value=0.50, help="split between platform and publisher"
-    )
+REFERENCE = "https://policydialogue.org/publications/working-papers/paying-for-news-what-google-and-meta-owe-us-publishers-draft-working-paper/"
 
-# st.write(inputs)
-st.write(v1 * v2 * v3, "dollar")
+
+def add_google_search_platform(currency):
+    REVENUE_DEFAULTS = 57.0e3  # in millions USD (2023)
+    TIME_PERCENT_DEFAULTS = 35.2  # in percent of time spent on news
+    HELP_TEXT = "Defaults for US market (2023). Modify for other markets."
+    revenue_google = st.number_input(
+        f"Google search ad revenue (in millions {currency})",
+        value=REVENUE_DEFAULTS,
+        help=HELP_TEXT,
+    )
+    time_percent_google = st.number_input(
+        f"Fraction of user demand for news content on Google",
+        value=TIME_PERCENT_DEFAULTS,
+        help=f"Defaults from reference: {REFERENCE} for US market.",
+        min_value=0.0,
+        max_value=100.0,
+    )
+    split_share_google = st.slider(
+        "Split share between Publisher and Google",
+        0.00,
+        1.00,
+        0.50,
+        help="Fractional split share of revenue between Publisher(left) and Google search(right), default = 0.50",
+    )
+    return revenue_google * time_percent_google / 100.0 * split_share_google
+
+
+def add_meta_platform(currency):
+    REVENUE_DEFAULTS = 28.78e3  # in millions USD (2022)
+    TIME_PERCENT_DEFAULTS = 13.2  # in percent of time spent on news
+    HELP_TEXT = "Defaults for US market (2022). Modify for other markets."
+    revenue_meta = st.number_input(
+        f"Facebook ad revenue (in millions {currency})",
+        value=REVENUE_DEFAULTS,
+        help=HELP_TEXT,
+    )
+    time_percent_meta = st.number_input(
+        f"Fraction of time spent consuming news content on Facebook",
+        value=TIME_PERCENT_DEFAULTS,
+        help=f"Defaults from reference: {REFERENCE} for US market.",
+        min_value=0.0,
+        max_value=100.0,
+    )
+    split_share_meta = st.slider(
+        "Split share between Publisher and Facebook",
+        0.00,
+        1.00,
+        0.50,
+        help="Fractional split share of revenue between Publisher(left) and Facebook(right), default = 0.50",
+    )
+    return revenue_meta * time_percent_meta / 100.0 * split_share_meta
+
+
+with st.sidebar:
+    # currency = st.selectbox("Currency", ["USD", "INR", "EUR", "Other"], index=0)
+    # if currency == "Other":
+    #     currency = st.text_input("Enter currency:")
+    currency = "USD"
+    st.subheader("Google")
+    google = add_google_search_platform(currency)
+
+    st.divider()
+
+    st.subheader("Facebook")
+    meta = add_meta_platform(currency)
+
+
+total = google + meta
+
+st.markdown(
+    "A [research paper](https://policydialogue.org/publications/working-papers/paying-for-news-what-google-and-meta-owe-us-publishers-draft-working-paper/) titled _Paying for News: What Google and Meta Owe US Publishers_ by Patrick Holder, Haaris Mateen, Anya Schiffrin, and Haris Tabakovic estimates the payment that Facebook and Google Search platforms would owe to news publishers for the use of news content, if the Journalism Competition & Preservation Act (JCPA) comes into force using a novel methodology."
+)
+
+st.markdown(
+    'This streamlit hosted web-application makes it easy to calculate the "fair payment" for other markets using the methodology described in the above paper. Please note that all data, values, methodology, and assumptions used in the code in this repository directly from the above source paper. The purpose of this application is to aid researchers to calculate numbers for their own countries and no gurantee about the accuracy of the generated "fair payment" should be expected. Please contact [Haaris Mateen](emailto:hmateen@uh.edu) the lead author of the study for any questions or comments on the original study, including the methodology and assumptions, or if you would like to understand more the genrated numbers from this web application.'
+)
+
+st.write("----")
+st.header(
+    "Estimated payments: ",
+    help=f"'Fair payment' from platforms to publishers; see reference: {REFERENCE} for methodology",
+)
+st.write(f"Google: ", round(google, 2), f"million {currency}.")
+st.write(f"Facebook: ", round(meta, 2), f"million {currency}.")
+st.write(f"Sum: ", round(total, 2), f"million {currency}.")
