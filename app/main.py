@@ -16,7 +16,7 @@ REFERENCE = "https://policydialogue.org/publications/working-papers/paying-for-n
 
 def add_google_search_platform(currency):
     REVENUE_DEFAULTS = 57.0e3  # in millions USD (2023)
-    TIME_PERCENT_DEFAULTS = 35.2  # in percent of time spent on news
+    TIME_PERCENT_DEFAULTS = 35.0  # in percent of time spent on news
     HELP_TEXT = "Defaults for US market (2023). Modify for other markets."
     revenue_google = st.number_input(
         f"Google search ad revenue (in millions {currency})",
