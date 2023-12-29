@@ -5,6 +5,6 @@ install:venv
 venv:
 	if [ ! -d ".venv" ]; then python3 -m venv .venv; fi
 
-app:venv
+app:install
 	@echo "Creating app..."
 	.venv/bin/python3 -m streamlit run app/main.py
