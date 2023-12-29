@@ -91,7 +91,8 @@ st.markdown(
 )
 
 st.write("----")
-st.header(
+st.subheader("Modify assumptions on the left to calculate the estimated payments below")
+st.subheader(
     "Estimated payments: ",
     help=f"'Fair payment' from platforms to publishers; see reference: {REFERENCE} for methodology",
 )
